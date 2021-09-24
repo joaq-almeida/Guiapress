@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database");
 
+const categoriesController = require("./categories/CategoriesController");
+const articlesController = require("./articles/ArticlesController");
+
 //view engine
 app.set("view engine", "ejs");
 
@@ -21,6 +24,9 @@ connection
     }).catch(erro => {
         console.log("Unable to connect to database " + erro);
     });
+
+app.use("/cat", categoriesController);
+app.use("/art", articlesController);
 
 app.get("/", (req, res) => {
     res.render("index");
