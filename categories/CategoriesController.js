@@ -47,20 +47,21 @@ router.get("/categores/delete/:id", (req, res) =>{
     }
 });
 
-//como diria o pedreiro em construção
-router.get("admin/categories/edit/:id", (req, res) => {
-    let id = req.params.id;
-    Category.findAll({
-        where: {
-            id: id
-        }
-    }).then((category) => {
-        res.render("", {category: category});
-    });
-});
+////como diria o pedreiro em construção...
+// router.get("admin/categories/edit/:id", (req, res) => {
+//     let id = req.params.id;
+//     Category.findAll({
+//         where: {
+//             id: id
+//         }
+//     }).then((category) => {
+//         res.render("", {category: category});
+//     });
+// });
 
-router.post("admin/categories/edit", (req, res) => {
+// router.post("admin/categories/edit", (req, res) => {
     
-});
+// });
+
 
 module.exports = router;
