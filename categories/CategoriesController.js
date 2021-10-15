@@ -14,10 +14,10 @@ router.post("/categories/save", (req, res) => {
             title: title,
             slug: slugify(title)
         }).then(() => {
-            res.redirect("/");
+            res.redirect("/admin/categories");
         });
     }else{
-        res.redirect("admin/categories/new");
+        res.redirect("/admin/categories/new");
     }
 });
 
@@ -27,7 +27,7 @@ router.get("/admin/categories", (req, res) => {
     });
 });
 
-router.get("/categores/delete/:id", (req, res) =>{
+router.get("/categories/delete/:id", (req, res) =>{
     let id = req.params.id;
 
     if(id != undefined){
@@ -37,13 +37,13 @@ router.get("/categores/delete/:id", (req, res) =>{
                     id: id
                 }
             }).then(() => {
-                res.render("admin/categorias/index");
+                res.redirect("/admin/categories");
             });
         }else{
-            res.render("admin/categorias/index");
+            res.redirect("/admin/categories");
         }
     }else{
-        res.render("admin/categorias/index");
+        res.redirect("admin/categories");
     }
 });
 
