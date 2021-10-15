@@ -21,8 +21,8 @@
                     <th><%= category.title %></th>
                     <th><%= category.slug %></th>
                     <th>
-                        <a class="btn btn-warning">Editar</a>
-                        <a href="/categories/delete/<%= category.id %>" class="btn btn-danger">Deletar</a>
+                        <a class="btn btn-warning" href="/admin/categories/edit/<%= category.id %>">Editar</a>
+                        <button class="btn btn-danger" onclick="ConfirmDelete(<%= category.id %>)">Deletar</a>
                     </th>
                 </tr>
             <% }); %>
@@ -30,3 +30,16 @@
     </table>
 </div>
 <%- include("../../partials/footer.ejs")  %> 
+<script>
+    function ConfirmDelete(id){
+        
+        let decision = confirm("Tem certeza que quer deletar esta categoria?");
+        
+        if(decision){
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "/categories/delete/"+id, false); 
+            xhttp.send();
+            location.reload();
+        }
+    }
+</script>

@@ -47,21 +47,37 @@ router.get("/categories/delete/:id", (req, res) =>{
     }
 });
 
-////como diria o pedreiro em construção...
-// router.get("admin/categories/edit/:id", (req, res) => {
-//     let id = req.params.id;
-//     Category.findAll({
-//         where: {
-//             id: id
-//         }
-//     }).then((category) => {
-//         res.render("", {category: category});
-//     });
-// });
+router.get("/admin/categories/edit/:id", (req, res) => {
+    let id = req.params.id;
 
-// router.post("admin/categories/edit", (req, res) => {
-    
-// });
+    if(isNaN(id)){
+        res.redirect("/admin/categories");
+    }
+
+    Category.findByPk(id).then(category => {
+        if(category != undefined){
+            
+            res.render("admin/categories/edit", {category: category});
+        }else{
+            res.redirect("/admin/categories");
+        }
+    }).catch(error => {
+        res.redirect("/admin/categories");
+    });
+});
+
+router.post("/categories/edit", (req, res) => {
+    let id = req.body.id;
+    let title = req.body.title;
+
+    Category.update({title: title, slug: slugify(title)},{
+        where:{
+            id: id
+        }
+    }).then(() => {
+        res.redirect("/admin/categories");
+    });
+});
 
 
 module.exports = router;
